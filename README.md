@@ -1,6 +1,23 @@
-# SauceDemo Test Automation Framework
-
 This project is a Selenium-based automated test framework for the SauceDemo e-commerce site using **Java**, **TestNG**, and **Allure Reports**.
+
+---
+
+## 🔗 Repository Location
+
+**GitHub:** [https://github.com/Thilanka97B/saucedemo-automation](https://github.com/Thilanka97B/saucedemo-automation)
+
+---
+
+## 🔄 Clone This Project
+
+To clone and set up locally:
+
+```bash
+git clone https://github.com/Thilanka97B/saucedemo-automation.git
+cd saucedemo-automation
+```
+
+---
 
 ## 📁 Project Structure
 
@@ -44,13 +61,12 @@ brew install allure
 
 ## ⚙️ Setup Instructions
 
-
-1.**Install Dependencies**
+1. **Install Dependencies**
 ```bash
 mvn clean install
 ```
 
-2.**Update Config (if applicable)**  
+2. **Update Config (if applicable)**  
    Place any required configuration files in the `src/main/resources` directory.
 
 ---
@@ -97,5 +113,3 @@ Screenshots are saved in the `/screenshots` folder automatically during test ste
 Feel free to fork this repo and contribute with pull requests. Suggestions and improvements are always welcome.
 
 ---
-
-
