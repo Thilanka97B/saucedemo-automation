@@ -1,0 +1,4 @@
+"BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
+"0","","0","","2","0","","0"
+"0","Authentication","0","Login","1","0","User logs in with valid credentials","0"
+"0","Checkout Flow","1","End-to-End Purchase","0","0","Complete order from login to confirmation","0"

@@ -1,0 +1,5 @@
+tests\BaseTest.class
+tests\ProductSearchTest.class
+tests\CheckoutTest.class
+tests\LoginTest.class
+tests\SortingTest.class

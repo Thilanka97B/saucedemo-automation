@@ -1,0 +1,8 @@
+pages\InventoryPage.class
+pages\LoginPage.class
+utils\DriverFactory.class
+pages\CartPage.class
+pages\CheckoutPage.class
+pages\CheckoutOverviewPage.class
+utils\ConfigReader.class
+utils\TestUtil.class
