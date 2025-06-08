@@ -7,16 +7,23 @@ import pages.InventoryPage;
 import utils.DriverFactory;
 import utils.TestUtil;
 import org.openqa.selenium.WebDriver;
+
 import java.util.logging.Logger;
+
 import io.qameta.allure.*;
 import io.qameta.allure.testng.AllureTestNg;
 import org.testng.annotations.Listeners;
 
 @Listeners({AllureTestNg.class})
 public class LoginTest {
+
     WebDriver driver;
     private static final Logger logger = Logger.getLogger(LoginTest.class.getName());
 
+    /**
+     * Setup method executed before each test.
+     * Initializes the WebDriver and navigates to the login page.
+     */
     @BeforeMethod
     @Step("Setup WebDriver and open login page")
     public void setup() {
@@ -26,6 +33,9 @@ public class LoginTest {
         logger.info("Navigated to SauceDemo login page.");
     }
 
+    /**
+     * Test to verify successful login using valid credentials.
+     */
     @Test(description = "Verify valid login functionality")
     @Epic("Authentication")
     @Feature("Login")
@@ -38,32 +48,42 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(driver);
         login("standard_user", "secret_sauce");
 
-        // Assert redirection
+        // Verify redirection to inventory page after login
         String currentUrl = driver.getCurrentUrl();
         logger.info("Current URL after login: " + currentUrl);
         Assert.assertTrue(currentUrl.contains("/inventory.html"), "User is not redirected to inventory page");
 
-        // Assert inventory
+        // Verify inventory items are displayed
         InventoryPage inventoryPage = new InventoryPage(driver);
         int itemCount = inventoryPage.getProductTitles().size();
         logger.info("Number of products displayed: " + itemCount);
         Assert.assertTrue(itemCount > 0, "No inventory items displayed");
 
-        // Screenshot
+        // Capture screenshot for Allure report
         attachScreenshot("valid_login");
     }
 
+    /**
+     * Helper method to perform login and log the action.
+     */
     @Step("Login with username: {0} and password: {1}")
     private void login(String username, String password) {
         new LoginPage(driver).login(username, password);
         logger.info("Login form submitted.");
     }
 
+    /**
+     * Captures a screenshot and attaches it to the Allure report.
+     */
     @Attachment(value = "{0}", type = "image/png")
     private byte[] attachScreenshot(String name) {
         return TestUtil.getScreenshotBytes(driver);
     }
 
+    /**
+     * Teardown method executed after each test.
+     * Closes the browser and cleans up resources.
+     */
     @AfterMethod
     @Step("Close the browser")
     public void teardown() {

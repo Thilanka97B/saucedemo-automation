@@ -20,6 +20,9 @@ public class ProductSearchTest {
     WebDriver driver;
     private static final Logger logger = Logger.getLogger(ProductSearchTest.class.getName());
 
+    /**
+     * Initializes the WebDriver and logs into the SauceDemo application.
+     */
     @BeforeMethod
     @Step("Initialize WebDriver and login to SauceDemo")
     public void setup() {
@@ -27,13 +30,18 @@ public class ProductSearchTest {
         driver = DriverFactory.initDriver();
         driver.get("https://www.saucedemo.com/");
 
+        // Log in using standard credentials
         logger.info("Logging in with valid credentials.");
         new LoginPage(driver).login("standard_user", "secret_sauce");
 
+        // Capture post-login screenshot
         logger.info("Login successful. Taking screenshot.");
         attachScreenshot("after_login");
     }
 
+    /**
+     * Verifies that product titles containing a specific keyword are returned.
+     */
     @Test(description = "Verify product search returns expected results")
     @Epic("Product Search")
     @Feature("Search Functionality")
@@ -45,25 +53,36 @@ public class ProductSearchTest {
 
         InventoryPage inventory = new InventoryPage(driver);
 
+        // Count how many product titles contain the search keyword
         long count = countProductsWithKeyword(keyword, inventory);
-
         logger.info("Number of products found with keyword '" + keyword + "': " + count);
 
+        // Capture screenshot of search results
         attachScreenshot("after_search");
 
+        // Assert that at least one product was found
         Assert.assertTrue(count > 0, "No products found with keyword '" + keyword + "'");
     }
 
+    /**
+     * Utility method to count products containing a keyword in their titles.
+     */
     @Step("Count products with keyword '{keyword}' in title")
     private long countProductsWithKeyword(String keyword, InventoryPage inventory) {
         return inventory.countTitlesWith(keyword);
     }
 
+    /**
+     * Attaches a screenshot to the Allure report.
+     */
     @Attachment(value = "{0}", type = "image/png")
     private byte[] attachScreenshot(String name) {
         return TestUtil.getScreenshotBytes(driver);
     }
 
+    /**
+     * Cleans up the WebDriver session after each test.
+     */
     @AfterMethod
     @Step("Quit WebDriver")
     public void teardown() {
